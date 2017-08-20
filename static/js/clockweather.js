@@ -1,6 +1,5 @@
-var baidu_key = "yourkey"
 var he_key = "yourkey"
-var city = ""
+var city = "苏州"
 
 $(function() {
     // clock
@@ -62,13 +61,6 @@ $(function() {
         counter: false
     });
 
-    if (city.length == 0) {
-        var url = "http://api.map.baidu.com/location/ip?" + "ak=" + baidu_key + "&coor=bd09ll"
-        url = url + "&callback=?" // 添加callback使getJSON识别为jsonp格式，否则报错
-        $.getJSON(url, function(json) {
-            city = json.content.address_detail.city
-        });
-    }
     setData();
 });
 
@@ -77,7 +69,7 @@ function setData() {
     $.getJSON(url, function(data) {
         console.log(data);
         // 天气动画
-        var result = data.HeWeather5[0]
+        var result = data.HeWeather5[0];
 
         // city: "苏州",
         $("#city").text(result.basic.city);
@@ -85,9 +77,9 @@ function setData() {
         jg.refresh(result.aqi.city.aqi);
 
         // 天气动画
-        var code = result.now.cond.code
+        var code = result.now.cond.code;
         var myDate = new Date();
-        var currentHour = myDate.getHours()
+        var currentHour = myDate.getHours();
         var daylight = true;
         if (currentHour > 17 || currentHour < 6) {
             daylight = false;
@@ -101,15 +93,15 @@ function setData() {
             } else {
                 animation = "starry";
             }
-        } else if (101 <= code <= 103) {
+        } else if (code >= 101 && code <= 103) {
             animation = "cloudy"
-        } else if (300 <= code <= 313) {
-            if (310 <= code <= 312) {
+        } else if (code >= 300 && code <= 313) {
+            if (code >= 310 && code <= 312) {
                 animation = "stormy"
             } else {
                 animation = "rainy"
             }
-        } else if (400 <= code <= 407) {
+        } else if (code >= 400 && code <= 407) {
             animation = "snowy"
         }
         $("#weather_icon").attr("class", animation);
