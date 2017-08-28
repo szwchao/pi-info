@@ -4,16 +4,32 @@ body {
   color: #fff;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
 p {
   font-size:18px;
   text-align:center;
   margin-bottom: 0;
 }
 
-.widget-container {
+.slider {
+  /*margin-top: 15%;*/
+  overflow: hidden;
+}
+
+.slider .content { position: relative; }
+.slider .content .page {
   width: 760px;
   height: 460px;
   display: block;
+  float: left;
 }
 
 
@@ -167,4 +183,234 @@ h3 {
 .icon-wrapper {
     font-size: 30px;
     text-align: center;
+}
+
+
+/* .section SECTION
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.section {
+  background: #F45B69;
+  padding: 50px 0;
+}
+
+.section .container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section h1 {
+  font-size: 2.5rem;
+}
+
+.section h2 {
+  font-size: 1.3rem;
+}
+
+.bus-left {
+  display: inline-block;
+}
+
+.bus-right {
+  float: right;
+}
+
+.nearest {
+  margin-top: 30px;
+}
+
+
+/* TIMELINE
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.timeline {
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+
+.timeline ol {
+  font-size: 0;
+  /*width: 90vw;*/
+  /*padding: 120px 0;*/
+  margin-top: 100px;
+  transition: all 1s;
+}
+
+.timeline ol li {
+  position: relative;
+  display: inline-block;
+  list-style-type: none;
+  background-color: #6ab0de;
+  height: 10px;
+  width: 10%;
+}
+
+.timeline ol li:last-child {
+  width: 80px;
+}
+
+.status {
+  padding: 0px 40px;
+  display: flex;
+  /*树莓派里使白球居中*/
+  justify-content: center;
+  position: relative;
+  transition: all 200ms ease-in;
+}
+.status h4 {
+  font-family: roboto;
+  font-size: 1.8rem;
+  display: block;
+  position: relative;
+  top: 40px;
+  text-align: center;
+  width: 36px;
+  white-space: normal;
+}
+
+.status:before {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  /*transform: translateY(-40%);*/
+  transform: translate(-25%, -40%);
+  border-radius: 50%;
+  box-sizing: content-box;
+}
+
+.timeline ol li:nth-child(4n+1) .status::before {
+  background-color: #2c3e50;
+}
+.timeline ol li:nth-child(4n+2) .status::before {
+  background-color: #e74c3c;
+}
+.timeline ol li:nth-child(4n+3) .status::before {
+  background-color: #7b3;
+}
+.timeline ol li:nth-child(4n+4) .status::before {
+  background-color: #20638f;
+}
+
+.status span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  position: absolute;
+  border-radius: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin-top: -6px;
+}
+
+.status time_up {
+    font-family: roboto;
+    font-size: 1.3rem;
+    display: block;
+    position: absolute;
+    top: -40px;
+    text-align: center;
+    white-space: normal;
+}
+
+.status time_bot {
+    font-family: roboto;
+    font-size: 1.3rem;
+    display: block;
+    position: absolute;
+    top: 30px;
+    text-align: center;
+    white-space: normal;
+}
+
+.bus_title {
+    font-size: 1.8rem;
+    margin-top: 10px;
+}
+
+/* TIMELINE ARROWS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.timeline .arrows {
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+}
+
+.timeline .arrows .arrow {
+  background: #222233;
+  border:0px solid transparent; /* this was 1px earlier */
+}
+.timeline .arrows .arrow__prev {
+  margin-right: 20px;
+}
+
+.timeline .disabled {
+  opacity: .5;
+}
+
+.timeline .arrows img {
+  width: 45px;
+  height: 45px;
+}
+
+/* GENERAL MEDIA QUERIES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media screen and (max-width: 480px) {
+  .timeline ol,
+  .timeline ol li {
+    width: auto; 
+  }
+  
+  .timeline ol {
+    padding: 0;
+    transform: none !important;
+  }
+  
+  .timeline ol li {
+    display: block;
+    height: auto;
+    background: transparent;
+  }
+  
+  .timeline ol li:first-child {
+    margin-top: 25px;
+  }
+  
+  .timeline ol li:not(:first-child) {
+    margin-left: auto;
+  }
+  
+  .timeline ol li div {
+    width: 94%;
+    height: auto !important;
+    margin: 0 auto 25px;
+  }
+  
+  .timeline ol li div {
+    position: static;
+  }
+  
+  .timeline ol li:nth-child(odd) div {
+    transform: none;
+  }
+  
+  .timeline ol li:nth-child(odd) div::before,
+  .timeline ol li:nth-child(even) div::before {
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    border: none;
+    border-left: 1px solid white;
+    height: 25px;
+  }
+  
+  .timeline ol li:last-child,
+  .timeline ol li:nth-last-child(2) div::before,
+  .timeline ol li:not(:last-child)::after,
+  .timeline .arrows {
+    display: none;
+  }
 }
