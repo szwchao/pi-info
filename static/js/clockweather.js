@@ -93,7 +93,7 @@ function setData() {
             } else {
                 animation = "starry";
             }
-        } else if (code >= 101 && code <= 103) {
+        } else if (code >= 101 && code <= 104) {
             animation = "cloudy"
         } else if (code >= 300 && code <= 313) {
             if (code >= 310 && code <= 312) {
