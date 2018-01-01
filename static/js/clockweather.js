@@ -5,6 +5,7 @@ $(function() {
     // clock
     let clock = setInterval(setTime, 1000);
     let data = setInterval(setData, 1000 * 60 * 10);
+    let aqi = setInterval(setAQI, 1000 * 60 * 10);
     let $time = $('#time');
     let $date = $('#date');
     let $cnDate = $('#cnDate');
