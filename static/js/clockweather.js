@@ -62,22 +62,21 @@ $(function() {
     });
 
     setData();
+    setAQI();
 });
 
 function setData() {
-    var url = "https://free-api.heweather.com/v5/weather?city=" + city + "&key=" + he_key;
+    var url = "https://free-api.heweather.com/s6/weather?location=" + city + "&key=" + he_key;
     $.getJSON(url, function(data) {
         console.log(data);
         // 天气动画
-        var result = data.HeWeather5[0];
+        var result = data.HeWeather6[0];
 
         // city: "苏州",
         $("#city").text(result.basic.city);
-        // AQI
-        jg.refresh(result.aqi.city.aqi);
 
         // 天气动画
-        var code = result.now.cond.code;
+        var code = result.now.cond_code;
         var myDate = new Date();
         var currentHour = myDate.getHours();
         var daylight = true;
@@ -93,7 +92,7 @@ function setData() {
             } else {
                 animation = "starry";
             }
-        } else if (code >= 101 && code <= 103) {
+        } else if (code >= 101 && code <= 104) {
             animation = "cloudy"
         } else if (code >= 300 && code <= 313) {
             if (code >= 310 && code <= 312) {
@@ -115,23 +114,34 @@ function setData() {
         var icon_link_tail = '.png" height="70" width="70"</img>';
         var forecast = result.daily_forecast;
         for (var i = 0; i < 3; ++i) {
-            if (forecast[i].cond.txt_d != forecast[i].cond.txt_n) {
-                txt = forecast[i].cond.txt_d + "转" + forecast[i].cond.txt_n;
-                icon = icon_link_head + forecast[i].cond.code_d + icon_link_tail;
-                var icon_code_night = forecast[i].cond.code_n;
+            if (forecast[i].cond_txt_d != forecast[i].cond_txt_n) {
+                txt = forecast[i].cond_txt_d + "转" + forecast[i].cond_txt_n;
+                icon = icon_link_head + forecast[i].cond_code_d + icon_link_tail;
+                var icon_code_night = forecast[i].cond_code_n;
                 if (icon_code_night == 100 || icon_code_night == 103) {
                     icon_code_night = icon_code_night + "_night";
                 }
                 icon += icon_link_head + icon_code_night + icon_link_tail;
             } else {
-                txt = forecast[i].cond.txt_d;
-                icon = icon_link_head + forecast[i].cond.code_d + icon_link_tail;
+                txt = forecast[i].cond_txt_d;
+                icon = icon_link_head + forecast[i].cond_code_d + icon_link_tail;
             }
             $(".weather" + i).text(txt);
-            $(".temp" + i).text(forecast[i].tmp.min + "℃ / " + forecast[i].tmp.max + "℃");
+            $(".temp" + i).text(forecast[i].tmp_min + "℃ / " + forecast[i].tmp_max + "℃");
             //"wind": "东风3-4级", TODO 也可能是“东北风微风”，不应该加“级”
-            $(".wind" + i).text(forecast[i].wind.dir + forecast[i].wind.sc + "级");
+            $(".wind" + i).text(forecast[i].wind_dir + forecast[i].wind_sc + "级");
             $("#icon" + i).html(icon);
         }
+    });
+
+}
+
+function setAQI() {
+    var url = "https://free-api.heweather.com/s6/air/now?location=" + city + "&key=" + he_key;
+    $.getJSON(url, function(data) {
+        console.log(data);
+        var result = data.HeWeather6[0];
+        // AQI
+        jg.refresh(result.air_now_city.aqi);
     });
 }
