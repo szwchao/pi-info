@@ -1,5 +1,7 @@
 ﻿// code borrow from: http://www.webdeveasy.com/pages-slider-with-javascript-and-css/
 
+var HOME_PAGE = 1;
+
 (function($) {
     var PagesSlider = function (slider, options) {
         this.options = $.extend({
@@ -21,6 +23,7 @@
         this.bindEvents();
         this.count = 10;
         this.start_timer = false;
+        this.goToIndex(HOME_PAGE);
         setInterval(this.timeout.bind(this), 1000);  // bind this, 否则this指向window了
 
     };
@@ -28,7 +31,7 @@
         timeout: function () {
             if (this.start_timer) {
                 if (this.count == 0) {
-                    this.goToIndex(0);
+                    this.goToIndex(HOME_PAGE);
                     this.start_timer = false;
                 } else {
                     this.count--;
@@ -63,7 +66,7 @@
         doubleClick: function (event) {
             //this.enableDrag = true;
             //this.dragStartX = event.clientX;
-            if (this.currentIndex == 0)
+            if (this.currentIndex == 1)
             {
                 this.next();
                 //this.start_timer = true;
@@ -93,7 +96,7 @@
 
                 var delta = event.gesture.deltaX;
                 if (Math.abs(delta) > this.slider.width() / 5) {
-                    if (this.currentIndex == 0)
+                    if (this.currentIndex == 1)
                     {
                         this.count = 60;
                         this.start_timer = true;
@@ -141,7 +144,7 @@
             }
         },
         render: function () {
-            if (this.currentIndex != 0)
+            if (this.currentIndex == 2)
             {
                 // 切换到第二页时向右滑动
                 var timeline = document.querySelector(".timeline ol");
@@ -184,6 +187,8 @@
                         $("#nearest_we").text("无法获取公交信息")
                     }
                 });
+            } else if (this.currentIndex == 0) {
+                fillTempHumi();
             }
         }
     });

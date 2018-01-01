@@ -1,5 +1,5 @@
 body {
-  background-color: #222233;
+  background-color: #1e1920;
   font-family: Roboto, Helvetica, Arial, sans-serif;
   color: #fff;
 }
@@ -340,7 +340,7 @@ h3 {
 }
 
 .timeline .arrows .arrow {
-  background: #222233;
+  background: #1e1920;
   border:0px solid transparent; /* this was 1px earlier */
 }
 .timeline .arrows .arrow__prev {
@@ -414,3 +414,9 @@ h3 {
     display: none;
   }
 }
+
+#temp-chart {
+  margin-top: 25px;
+  margin-left: 25px;
+}
+
